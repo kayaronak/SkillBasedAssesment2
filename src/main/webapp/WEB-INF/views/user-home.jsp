@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Welcome to User Home</title>
 </head>
 <body>
+	<h1>This is User Home</h1>
+
+	<div><a href="${pageContext.request.contextPath}/user/show-kit">Show Kit Details</a></div>
+	<hr>
+	<div><a href="${pageContext.request.contextPath}/user/show-list">View Available Products</a></div>
 
 </body>
 </html>

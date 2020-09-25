@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.eval.coronakit.dao.KitDetailRepository;
 import com.eval.coronakit.entity.KitDetail;
+import com.eval.coronakit.entity.ProductMaster;
 
 @Service
 public class KitDetailServiceImpl implements KitDetailService {
@@ -16,14 +17,14 @@ public class KitDetailServiceImpl implements KitDetailService {
 	
 	@Override
 	public KitDetail addKitItem(KitDetail kitItem) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return this.repository.save(kitItem);
 	}
 
 	@Override
 	public KitDetail getKitItemById(int itemId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.repository.findById(itemId).orElse(null);
 	}
 
 	@Override

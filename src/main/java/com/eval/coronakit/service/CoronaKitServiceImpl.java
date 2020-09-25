@@ -14,14 +14,14 @@ public class CoronaKitServiceImpl implements CoronaKitService {
 	
 	@Override
 	public CoronaKit saveKit(CoronaKit kit) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.repository.save(kit);
 	}
 
 	@Override
 	public CoronaKit getKitById(int kitId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.repository.findById(kitId).orElse(null);
 	}
 
 }

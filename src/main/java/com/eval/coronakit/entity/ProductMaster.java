@@ -4,6 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class ProductMaster {
@@ -12,11 +17,17 @@ public class ProductMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
+	@NotEmpty(message = "Please enter a Product name.")
+	@Length(min = 2, message = "*should be minimun 2 char length")
 	private String productName;
-	
+
+	@NotNull(message = "Please enter a Product Cost.")
+	@Min(value = 10, message = "*minimum cost should 10.")
 	private Integer cost;
-	
+
+	@NotEmpty(message = "Please enter a Product Description.")
+	@Length(min = 5, message = "*minimum length should be 5 Characters.")
 	private String productDescription;
 	
 	public ProductMaster() {

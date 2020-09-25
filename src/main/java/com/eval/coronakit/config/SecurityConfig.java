@@ -8,34 +8,42 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
 
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-	
-	 	UserBuilder builder =  User.withDefaultPasswordEncoder();
-	 	auth.inMemoryAuthentication()
-	 		.withUser(builder.username("Admin").password("admin").roles("ADMIN"))
-	 		.withUser(builder.username("First").password("abc").roles("USER"))
-	 		.withUser(builder.username("Second").password("abc").roles("USER"));
-	} 
-	
-	
+
+		UserBuilder builder = User.withDefaultPasswordEncoder();
+		auth.inMemoryAuthentication().withUser(builder.username("Admin").password("admin").roles("ADMIN"))
+				.withUser(builder.username("First").password("abc").roles("USER"))
+				.withUser(builder.username("Second").password("abc").roles("USER"));
+	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/").permitAll().and()
-        .authorizeRequests().antMatchers("/console/**").permitAll();
+		http.authorizeRequests().antMatchers("/").permitAll().and().authorizeRequests().antMatchers("/console/**")
+				.permitAll();
+
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
-		
+
 		// Add Your Application Based Security config here
-		
+
+		http.authorizeRequests()
+			.antMatchers("/admin/**").hasRole("ADMIN")
+			.antMatchers("/user/**").hasRole("USER")
+
+			.and()
+				.formLogin().loginPage("/custom-login")
+				.loginProcessingUrl("/validate")
+				.defaultSuccessUrl("/home", true)
+				.permitAll()
+			.and()
+				.logout()
+			.and()
+				.exceptionHandling().accessDeniedPage("/custom-error");
 	}
 }
-
