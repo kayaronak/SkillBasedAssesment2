@@ -26,21 +26,41 @@ th {
 	background-color: #4CAF50;
 	color: white;
 }
+
+.errorblock {
+	color: #000;
+	background-color: #ffEEEE;
+	border: 3px solid #ff0000;
+	padding: 8px;
+	margin: 16px;
+}
+
 </style>
 
+
+<script>
+	function checkForBlank() {
+		if (document.getElementById('deliveryAddress').value == "") {
+			alert("Please Enter your Shipping Address.");
+			document.getElementById('deliveryAddress').style.borderColor = 'red';
+			return false;
+		}
+	}
+	
+</script>
 
 <title>Confirm Order</title>
 </head>
 <body>
 	<div><jsp:include page="header.jsp" /></div>
 
-	<h3>Your Corona Kit</h3>
-	<hr>
+	<h1>Your Corona Kit</h1>
+	
 	<core:choose>
 		<core:when test="${sessionScope.CartDetails!= null}">
-			<a href="${pageContext.request.contextPath }/user/show-list"><button>Add more products</button></a>
-			<br>
-			<br>
+		<a href="${pageContext.request.contextPath }/user/show-list"><button>Add more products</button></a>
+		<br><br>
+		
 			<table>
 				<thead>
 					<th>Product Name</th>
@@ -66,27 +86,24 @@ th {
 					</tr>
 				</tbody>
 			</table>
-			<hr>
 			<br>
-			<spring:form
-				action="${pageContext.request.contextPath}/user/finalize" method="post" modelAttribute="CoronaKit">
+			<spring:form action="${pageContext.request.contextPath}/user/finalize" method="post" modelAttribute="CoronaKit" onsubmit="return checkForBlank()">
 				<div>
 					<spring:label path="deliveryAddress"><b>Enter Shipping Address</spring:label>
 					<br>
-					<spring:textarea path="deliveryAddress" cols="20" rows="5" />
-					<spring:errors path="deliveryAddress" cssClass="error" />
-
-					<br><br> <input type="submit" value="Confirm Order">
+					<spring:textarea path="deliveryAddress" cols="25" rows="5" />
+					<br><br>
+					<input type="submit" value="Confirm Order">
+			
 				</div>
 			</spring:form>
 		</core:when>
 		<core:otherwise>
-			<h2>No Kits are added to cart for checkout. Please add kits to
-				proceed....</h2>
-			<a href="${pageContext.request.contextPath }/user/show-list">Show
-				Products For Shopping</a>
+			<h2>No Kits have been added to you to checkout.</h2>
+			<a href="${pageContext.request.contextPath }/user/show-list">Add Products</a>
 		</core:otherwise>
 	</core:choose>
 	<div><jsp:include page="footer.jsp" /></div>
 </body>
 </html>
+

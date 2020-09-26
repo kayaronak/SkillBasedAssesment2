@@ -13,9 +13,10 @@
 		color: red;
 	}
 </style>
-<title>Insert title here</title>
+<title>Add a New Product</title>
 </head>
 <body>
+<jsp:include page="header.jsp" />
 
 	<h1>Add a New Product</h1>
 	
@@ -34,18 +35,16 @@
 			</div>
 		</div>
 		<br>
-		<br>
 		<div>
 			<div>
 				<spring:label path="cost">Enter Product Cost</spring:label>
 			</div>
 			<div>
-				<spring:input path="cost" />
+				<spring:input path="cost" type="number" />
 				<spring:errors path="cost" cssClass="error" />
 			</div>
 		</div>
 
-		<br>
 		<br>
 		<div>
 			<div>
@@ -57,7 +56,6 @@
 			</div>
 		</div>
 		<br>
-		<br>
 
 		<div>
 			<div>
@@ -65,8 +63,7 @@
 			</div>
 		</div>
 	</spring:form>
-
-	<hr />
+	
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

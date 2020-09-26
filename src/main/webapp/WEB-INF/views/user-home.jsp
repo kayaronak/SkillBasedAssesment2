@@ -7,11 +7,15 @@
 <title>Welcome to User Home</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 	<h1>This is User Home</h1>
 
-	<div><a href="${pageContext.request.contextPath}/user/show-kit">Show Kit Details</a></div>
-	<hr>
-	<div><a href="${pageContext.request.contextPath}/user/show-list">View Available Products</a></div>
-
+	<a href="${pageContext.request.contextPath}/user/show-kit"><button>Show Kit Details</button></a>
+		&nbsp;&nbsp;&nbsp;
+	<a href="${pageContext.request.contextPath}/user/show-list"><button>View Available Products</button></a>
+	
+	<br>
+	<br>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

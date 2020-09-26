@@ -28,11 +28,14 @@ th {
 </style>
 </head>
 <body>
-	<div><jsp:include page="header.jsp" /></div>
+	<jsp:include page="header.jsp" />
+	<h1>Your Corona Kit Order Details</h1>
 	<a href="${pageContext.request.contextPath }/user/home"><button>User
 			Home</button></a>
-	<hr />
-	<h1>Your Corona Kit Order Details</h1>
+
+	<h2>
+		<b>Ordered Products Summary 
+	</h2>
 	<table>
 		<tbody>
 			<tr>
@@ -51,10 +54,6 @@ th {
 		</tbody>
 	</table>
 	<br>
-	<br>
-
-	<h3><b>Ordered Products</h3>
-
 	<table>
 		<thead>
 			<th>Corona Kit ID</th>
@@ -71,9 +70,15 @@ th {
 					<td>${kit.amount}</td>
 				</tr>
 			</core:forEach>
+			<td></td>
+				<td colspan="2"><b>Total Amount</td>
+				<td><b>${CoronaKit.totalAmount}</td>
 		</tbody>
 	</table>
-
+	<br>
+	<br>
 	<core:remove var="CartDetails" scope="session" />
+
+	<jsp:include page="footer.jsp" />
 </body>
 </html>
